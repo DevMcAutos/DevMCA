@@ -1,8 +1,13 @@
 const express = require("express");
 const connectMongo = require("connect-mongo");
 const adminRouter = require("../router/adminRouter");
+const bodyparser = require("body-parser");
 
 const server = express();
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(bodyparser.urlencoded({ extended: true }));
 
 const port = 8080;
 
