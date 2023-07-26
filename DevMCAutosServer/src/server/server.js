@@ -1,7 +1,6 @@
 const express = require("express");
 const connectMongo = require("connect-mongo");
 const adminRouter = require("../router/adminRouter");
-const carRouter = require("../router/carRouter");
 
 const server = express();
 
