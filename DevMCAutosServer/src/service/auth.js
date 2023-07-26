@@ -13,6 +13,11 @@ const user = {
 
 passport.use(
   new LocalStrategy(async (username, password, done) => {
+    if (username !== adminUser.username) {
+      console.log("Nombre de usuario incorrecto");
+      return done(null, false);
+    }
+
     if (!(await hashVerification(user.pass, password))) {
       console.log("Contraseña invalida");
       return done(null, false);
