@@ -7,8 +7,7 @@ class mongoContainer{
 
     async create(newCar){
         const car = new this.route(newCar);
-        car.id = uuidv4();
-        await car.save();
+        await car.save()
         console.log(`Auto guardado:\n${car}`);
     };
 
@@ -27,27 +26,29 @@ class mongoContainer{
     };
 
     async read(search, filters){
-        if(!search && !filters){
+        if(search === undefined&& JSON.stringify(filters) === "{}"){
             //mostrar todos los autos
-            const cars = await this.find();
+            const cars = await this.route.find();
             return cars;
-        }else if(search){
-            //filtrado por coincidencia de busqueda
+        }else if(JSON.stringify(search) !== "{}" && search !== undefined){
+            //filtrado por coincidencia de busqueda --- EJ: /getCars?search=toyota
+            
             const result = [];
-            const cars = await this.find();
-            cars.filter(search)((c)=>{
+            const cars = await this.route.find();
+            cars.filter((c)=>{
                 if(
                     c.model.includes(search)||
                     c.brand.includes(search)||
-                    c.traction.includes(search)||
-                    c.year.includes(search)
+                    c.traction.includes(search)
                 ){
                     result.push(c);
                 };
             });
             return result;
-        }else if(filters){
-            //filtrar por checkbox
+        }else if(JSON.stringify(filters) !== "{}"){
+            //filtrar por checkbox -- EJ: brand:peugeot
+            const cars = this.route.find(filters)
+            return cars
         };
     };
 };

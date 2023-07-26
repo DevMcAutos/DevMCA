@@ -1,10 +1,11 @@
 const Cars = require("../daos/models/automoviles");
 const mongoContainer = require("../daos/mongoContenedor");
-const carController = new mongoContainer();
+const carController = new mongoContainer(Cars);
 
 //Obtener autos con parametros
-async function getCarsParams(req, res) {
-  const { search, filters } = req.body;
+async function getCars(req, res) {
+  const search= req.query.search;
+  const filters = req.body;
   const cars = await carController.read(search, filters);
   if (cars.length === 0) {
     res.send("No hay resultados");
@@ -13,15 +14,10 @@ async function getCarsParams(req, res) {
   }
 }
 
-//Obtener todos los autos
-async function getCars(req, res) {
-  const cars = await carController.read();
-  res.status(200).json(cars);
-}
-
 //Registrar en BD un auto nuevo
 async function newCarPost(req, res) {
-  const newCar = req.body;
+  const {body} = req;
+  const newCar = body;
   await carController.create(newCar);
   const { brand, model, year, kms, engine, version, fuel, traction, price } =
     req.body;
@@ -60,7 +56,6 @@ async function updateCarParam(req, res) {
 module.exports = {
   newCarPost,
   getCars,
-  getCarsParams,
   updateCarParam,
   deleteCar,
 };

@@ -5,7 +5,6 @@ const compression = require("express");
 const { loginPost } = require("../service/auth");
 const {
   getCars,
-  getCarsParams,
   newCarPost,
   deleteCar,
   updateCarParam,
@@ -18,10 +17,9 @@ adminRouter.use(compression());
 
 //GET
 adminRouter.get("/getCars", getCars);
-adminRouter.get("/getCarsParams", getCarsParams);
 
 //POST
-adminRouter.post("/newCar", newCarPostMiddleware, newCarPost);
+adminRouter.post("/newCar",newCarPost);
 adminRouter.post("/login", loginPost);
 
 //DELETE
