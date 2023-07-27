@@ -23,9 +23,9 @@ adminRouter.post("/newCar",newCarPost);
 adminRouter.post("/login", loginPost);
 
 //DELETE
-adminRouter.delete("/deleteCar", deleteCar);
+adminRouter.delete("/deleteCar/:id", deleteCar);
 
 //UPDATE
-adminRouter.put("/updateCar", updateCarParam);
+adminRouter.put("/updateCar/:id", updateCarParam);
 
 module.exports = adminRouter;

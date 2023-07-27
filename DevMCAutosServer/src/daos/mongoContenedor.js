@@ -11,18 +11,29 @@ class mongoContainer{
         console.log(`Auto guardado:\n${car}`);
     };
 
-    async update(query, change){
-        const que = {};
-        que._id = query;
-        const carUpdate = await this.route.findOneAndUpdate(que, change);
-        console.log(`Auto modificado:\n${carUpdate}`);
+    async update(id, changes){    
+        try {
+            const result = []
+            const carUpdate = await this.route.findOneAndUpdate({_id: id}, changes);
+            console.log(`Auto modificado:\n${carUpdate.brand} ${carUpdate.model}`);
+            result.push(carUpdate)
+            return result;
+        } catch (error) {
+            return []
+        }
     }
 
-    async delete(query){
-        const que = {};
-        que._id = query;
-        const carDelete = await this.route(deleteOne)(que);
-        console.log(`Auto eliminado:\n${carDelete}`);
+    async delete(id){
+        try {
+            const result = []
+            const car = await this.route.findOne({_id:id})
+            result.push(car)
+            const carDelete = await this.route.deleteOne({_id:id});      
+            console.log(`Auto eliminado: ${car.brand} ${car.model}`);
+            return result
+        } catch (error) {
+            return []
+        } 
     };
 
     async read(search, filters){
@@ -31,15 +42,12 @@ class mongoContainer{
             const cars = await this.route.find();
             return cars;
         }else if(JSON.stringify(search) !== "{}" && search !== undefined){
-            //filtrado por coincidencia de busqueda --- EJ: /getCars?search=toyota
-            
+            //filtrado por coincidencia de busqueda --- EJ: /getCars?search=toyota 
             const result = [];
             const cars = await this.route.find();
             cars.filter((c)=>{
                 if(
-                    c.model.includes(search)||
-                    c.brand.includes(search)||
-                    c.traction.includes(search)
+                    c.name.includes(search)
                 ){
                     result.push(c);
                 };

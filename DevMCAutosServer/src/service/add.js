@@ -30,26 +30,27 @@ async function newCarPost(req, res) {
 
 //Borrar de la BD un auto
 async function deleteCar(req, res) {
-  const { id } = req.query;
+  const id = req.params.id;
   const deleteCar = await carController.delete(id);
-  if (deleteCar) {
-    res.status(200).json(deleteCar);
+  if (deleteCar.length === 1) {
+    res.status(200).json({msg: `${deleteCar[0].brand} ${deleteCar[0].model} eliminado`});
   } else {
-    res.status(404).json({ msg: "Auto ${id} no encontrado" });
+    res.status(404).json({ msg: `Auto ${id} no encontrado` });
   }
 }
 
 //Actualizar un valor de algún auto
 async function updateCarParam(req, res) {
-  const { id } = req.query;
+  const id = req.params.id;
   const changes = req.body;
   const updateCar = await carController.update(id, changes);
-  if (changes && updateCar) {
-    res.status(201).json(updateCar);
-  } else if (changes && !updateCar) {
-    res.status(404).json({ msg: "Auto con id: ${id} no encontrado" });
+  
+  if (JSON.stringify(changes) !== "{}" && updateCar.length > 0) {
+    res.status(201).json({msg:`Auto con id: ${id} modificado`});
+  } else if (JSON.stringify(changes) !== "{}" && updateCar.length === 0) {
+    res.status(404).json({ msg: `Auto con id: ${id} no encontrado` });
   } else {
-    res.status(400).json({ msg: "Erorr al modificar el auto con id: ${id}" });
+    res.status(400).json({ msg: `Erorr al modificar el auto con id: ${id}` });
   }
 }
 
