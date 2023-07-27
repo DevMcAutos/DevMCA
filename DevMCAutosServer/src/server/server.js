@@ -3,6 +3,7 @@ const connectMongo = require("connect-mongo");
 const adminRouter = require("../router/adminRouter");
 const bodyparser = require("body-parser");
 const mongoose = require("mongoose");
+const notFound = require("../middlewares/notFound")
 
 const app = express();
 
@@ -14,6 +15,7 @@ const password = "WL8dejINXIZCPyeu"
 
 mongoose.connect("mongodb+srv://devmcautomotores:WL8dejINXIZCPyeu@cluster0.a1uyqnf.mongodb.net/MCAutos")
 
+app.use(notFound)
 
 app.use(adminRouter);
 
