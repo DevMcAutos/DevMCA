@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const carCollection = "Automoviles";
 
 const carSchema = new mongoose.Schema({
-  title: {type:String, require:true},
+  name: {type:String, require:true},
   brand: {type: String, require:true},
   model: { type: String, require: true },
   year: { type: Number, require: true },

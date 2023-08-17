@@ -37,7 +37,7 @@ class mongoContainer{
     };
 
     async read(search, filters){
-        if(search === undefined&& JSON.stringify(filters) === "{}"){
+        if(search === undefined && JSON.stringify(filters) === "{}"){
             //mostrar todos los autos
             const cars = await this.route.find();
             return cars;
@@ -46,9 +46,7 @@ class mongoContainer{
             const result = [];
             const cars = await this.route.find();
             cars.filter((c)=>{
-                if(
-                    c.name.includes(search)
-                ){
+                if(c.name.includes(search)){
                     result.push(c);
                 };
             });

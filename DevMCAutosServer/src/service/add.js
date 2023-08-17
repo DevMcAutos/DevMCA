@@ -8,7 +8,7 @@ async function getCars(req, res) {
   const filters = req.body;
   const cars = await carController.read(search, filters);
   if (cars.length === 0) {
-    res.send("No hay resultados");
+    res.json({msg:"No hay resultados"});
   } else {
     res.json(cars);
   }
@@ -54,9 +54,17 @@ async function updateCarParam(req, res) {
   }
 }
 
+async function getCarsById(req,res){
+  const id = req.params.id;
+  const filters = {_id:id}
+  const car = await carController.read({}, filters);
+  res.json(car[0])
+}
+
 module.exports = {
   newCarPost,
   getCars,
   updateCarParam,
   deleteCar,
+  getCarsById
 };

@@ -8,6 +8,7 @@ const {
   newCarPost,
   deleteCar,
   updateCarParam,
+  getCarsById
 } = require("../service/add");
 const { newCarPostMiddleware } = require("../middlewares/middleware");
 const {} = require("../service/hash");
@@ -17,6 +18,7 @@ adminRouter.use(compression());
 
 //GET
 adminRouter.get("/getCars", getCars);
+adminRouter.get("/getCars/:id", getCarsById);
 
 //POST
 adminRouter.post("/newCar",newCarPost);

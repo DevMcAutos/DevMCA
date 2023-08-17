@@ -14,7 +14,7 @@ const password = "WL8dejINXIZCPyeu"
 
 app.use(express.json());
 app.use(bodyparser.urlencoded({ extended: true }));
-app.use(notFound)
+//app.use(notFound)
 app.use(cors());
 app.use(errorHandler)
 app.use(adminRouter);
