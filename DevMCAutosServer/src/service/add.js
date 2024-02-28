@@ -83,7 +83,7 @@ async function uploadImage(req,res) {
   console.log(images);
   const { url } = await put(`archivo/archivo.jpg`, images, { access: 'public' });
   // const { archivo } = await put(`archivo/archivo2.txt`, "hola soy un archivo", {access: "public"})
-  res.send(archivo, url)
+  res.send(url)
 }
 
 //Actualizar un valor de algún auto
