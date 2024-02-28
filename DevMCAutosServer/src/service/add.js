@@ -76,7 +76,11 @@ async function deleteCar(req, res) {
 }
 
 async function uploadImage(req,res) {
-  const { url } = await put('articles/blob.txt', 'Hello World!', { access: 'public' });
+  const images = req.body
+  const ubicacion = req.params
+  console.log(ubicacion);
+  console.log(images);
+  const { url } = await put(``, 'Hello World!', { access: 'public' });
   res.send(url)
 }
 
