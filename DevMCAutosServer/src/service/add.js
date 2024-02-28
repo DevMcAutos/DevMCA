@@ -77,12 +77,13 @@ async function deleteCar(req, res) {
 }
 
 async function uploadImage(req,res) {
-  const images = req.body
+  const images = req.files
   const ubicacion = req.query
   console.log(ubicacion);
   console.log(images);
   const { url } = await put(`archivo/archivo.jpg`, images[0], { access: 'public' });
-  res.send(url)
+  const { archivo } = await put(`archivo/archivo2.txt`, "hola soy un archivo", {access: "public"})
+  res.send(url, archivo)
 }
 
 //Actualizar un valor de algún auto
