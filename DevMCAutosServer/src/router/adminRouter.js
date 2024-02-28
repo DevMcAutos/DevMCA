@@ -56,7 +56,7 @@ adminRouter.post("/login", loginPost, (req,res)=>{
   const flag = req.isAuthenticated()
   res.send({logged:flag})
 });
-adminRouter.post("/imagen", uploadImage)
+adminRouter.post("/imagen", upload.any(), uploadImage)
 adminRouter.get("/logged", (req,res)=>{
   console.log(req.isAuthenticated());
 })
