@@ -3,7 +3,7 @@ const mongoContainer = require("../daos/mongoContenedor");
 const carController = new mongoContainer(Cars);
 const multer = require('multer')
 const fs = require('fs');
-
+const {put} = require("@vercel/blob")
 //Obtener autos con parametros
 async function getCars(req, res) {
   const search= req.query.search
@@ -75,6 +75,11 @@ async function deleteCar(req, res) {
   }
 }
 
+async function uploadImage(req,res) {
+  const { url } = await put('articles/blob.txt', 'Hello World!', { access: 'public' });
+  res.send(url)
+}
+
 //Actualizar un valor de algún auto
 async function updateCarParam(req, res) {
   const id = req.params.id;
@@ -133,5 +138,6 @@ module.exports = {
   getCars,
   updateCarParam,
   deleteCar,
-  getCarsById
+  getCarsById,
+  uploadImage
 };

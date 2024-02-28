@@ -4,6 +4,7 @@ const multer = require('multer')
 const session = require('express-session')
 const passport = require('passport')
 const cookieParser = require('cookie-parser')
+const { put } = require("@vercel/blob")
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
       cb(null, './src/img/'); // Directorio donde se guardarán los archivos
@@ -38,7 +39,8 @@ const {
   newCarPost,
   deleteCar,
   updateCarParam,
-  getCarsById
+  getCarsById,
+  uploadImage
 } = require("../service/add");
 const { newCarPostMiddleware, uploadImages} = require("../middlewares/middleware");
 const {} = require("../service/hash");
@@ -54,8 +56,7 @@ adminRouter.post("/login", loginPost, (req,res)=>{
   const flag = req.isAuthenticated()
   res.send({logged:flag})
 });
-adminRouter.post("/imagen", upload.any(), async(req,res,next)=>{
-})
+adminRouter.post("/imagen", uploadImage)
 adminRouter.get("/logged", (req,res)=>{
   console.log(req.isAuthenticated());
 })
