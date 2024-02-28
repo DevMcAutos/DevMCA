@@ -24,32 +24,7 @@ async function newCarPost(req, res) {
   const { brand, model, year, kms, engine, version, fuel, traction, price, image, detalle} =
     req.body;
   newCar.name = `${brand} ${model} ${version} ${year}`
-  newCar.image = []
-  const move = multer({dest:`./src/img/${brand.replace(/ /g, "-")}-${model.replace(/ /g, "-")}-${version.replace(/ /g, "-")}-${year.replace(/ /g, "-")}-${detalle?.replace(/ /g, "-")}`})
-      await fs.readdir(`./src/img/`, (error, archivos) => {
-        archivos.forEach((archivo) => {
-          const rutaCompleta = `./src/img/${archivo}`;
-        fs.stat(rutaCompleta, (error, stats) => {
-            if (stats.isDirectory()) {
-            } else {
-                newCar.image.push(`http://localhost:8080/imagen/${brand.replace(/ /g, "-")}-${model.replace(/ /g, "-")}-${version.replace(/ /g, "-")}-${year.replace(/ /g, "-")}-${detalle.replace(/ /g, "-")}/${archivo}`)
-                newCar.image.sort(function (a, b) {
-                  return a - b;
-                });
-                const oldPath = rutaCompleta
-                const newPath = `./src/img/${brand.replace(/ /g, "-")}-${model.replace(/ /g, "-")}-${version.replace(/ /g, "-")}-${year.replace(/ /g, "-")}-${detalle.replace(/ /g, "-")}/${archivo}`
-                  fs.rename(oldPath, newPath, function (err) {
-                    if (err) throw err
-                  })
-                
-            }
-        });
-    });
-});
-  setTimeout(() => {
-    carController.create(newCar);
-  }, 2500);
-  
+    carController.create(newCar); 
   if ((brand, model, year, kms, engine, version, fuel, traction, price, image)) {
     res.status(201).json(newCar);
   } else {
@@ -77,6 +52,7 @@ async function deleteCar(req, res) {
 }
 
 async function uploadImage(req,res) {
+  console.log(req.body)
   const images = req.files[0]
   const ubicacion = req.query
   console.log(ubicacion);
