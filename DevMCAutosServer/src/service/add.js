@@ -4,6 +4,7 @@ const carController = new mongoContainer(Cars);
 const multer = require('multer')
 const fs = require('fs');
 const {put} = require("@vercel/blob")
+
 //Obtener autos con parametros
 async function getCars(req, res) {
   const search= req.query.search
@@ -77,10 +78,10 @@ async function deleteCar(req, res) {
 
 async function uploadImage(req,res) {
   const images = req.body
-  const ubicacion = req.params
+  const ubicacion = req.query
   console.log(ubicacion);
   console.log(images);
-  const { url } = await put(``, 'Hello World!', { access: 'public' });
+  const { url } = await put(`archivo/archivo.jpg`, images[0], { access: 'public' });
   res.send(url)
 }
 
