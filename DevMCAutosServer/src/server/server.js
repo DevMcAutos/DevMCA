@@ -36,3 +36,6 @@ mongoose.connect("mongodb+srv://devmcautomotores:WL8dejINXIZCPyeu@cluster0.a1uyq
 app.listen(port, () => {
   console.log(`Servidor listo escuchando en el puerto ${port}`);
 });
+
+
+module.export = app
