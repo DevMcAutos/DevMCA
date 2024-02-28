@@ -6,7 +6,7 @@ const mongoose = require("mongoose");
 const notFound = require("../middlewares/notFound")
 const cors = require('cors');
 const errorHandler = require("../middlewares/errorHandler")
-
+const path = require('path');
 const app = express();
 
 const port = 8080;
@@ -18,7 +18,14 @@ app.use(bodyparser.urlencoded({ extended: true }));
 app.use(cors());
 app.use(errorHandler)
 app.use(adminRouter);
+app.use('/img', express.static(path.join(__dirname, 'img')));
 
+// Ruta para mostrar una imagen específica
+app.get('/imagen/:auto/:nombreImagen', (req, res) => {
+    const nombreImagen = req.params.nombreImagen;
+    const auto = req.params.auto
+    res.sendFile(path.join(__dirname, `../img/${auto}`, nombreImagen));
+});
 
 
 

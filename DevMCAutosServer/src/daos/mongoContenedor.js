@@ -46,7 +46,7 @@ class mongoContainer{
             const result = [];
             const cars = await this.route.find();
             cars.filter((c)=>{
-                if(c.name.includes(search)){
+                if(c.name.toLowerCase().includes(search.toLowerCase())){
                     result.push(c);
                 };
             });

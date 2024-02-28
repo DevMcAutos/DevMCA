@@ -14,7 +14,8 @@ const carSchema = new mongoose.Schema({
   fuel: { type: String, require: true },
   traction: { type: String, require: true },
   price: {type: Number, require:true},
-  image: {type: String, require:true}
+  image: [{type: String, require:true}],
+  detalle: {type:String, require:false}
 });
 
 //agregado brand y price
