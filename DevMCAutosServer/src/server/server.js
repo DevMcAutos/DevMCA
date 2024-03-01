@@ -10,7 +10,6 @@ const path = require('path');
 const app = express();
 
 const port = 8080;
-const password = "WL8dejINXIZCPyeu"
 
 app.use(express.json());
 app.use(bodyparser.urlencoded({ extended: true }));
@@ -29,7 +28,7 @@ app.get('/imagen/:auto/:nombreImagen', (req, res) => {
 
 
 
-mongoose.connect("mongodb+srv://devmcautomotores:WL8dejINXIZCPyeu@cluster0.a1uyqnf.mongodb.net/MCAutos")
+mongoose.connect(process.env.MONGO_DB)
 
 
 

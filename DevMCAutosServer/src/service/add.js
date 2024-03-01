@@ -71,7 +71,6 @@ async function updateCarParam(req, res) {
   const car = await carController.read({}, filters);
   if (!changes.brand) {
     changes.brand = car[0].brand
-    console.log(changes.brand)
   }
   if (!changes.model) {
     changes.model = car[0].model
