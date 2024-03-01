@@ -67,35 +67,37 @@ async function updateCarParam(req, res) {
   const id = req.params.id;
   const changes = req.body;
   const filters = {_id:id}
+  console.log(changes);
   const car = await carController.read({}, filters);
-  if (changes.brand==="") {
+  if (!changes.brand) {
     changes.brand = car[0].brand
+    console.log(changes.brand)
   }
-  if (changes.model === "") {
+  if (!changes.model) {
     changes.model = car[0].model
   }
-  if (changes.year === ""){
+  if (!changes.year){
     changes.year = car[0].year
   }
-  if (changes.kms ===""){
+  if (!changes.kms ===""){
     changes.kms = car[0].kms
   }
-  if(changes.engine === ""){
+  if(changes.engine){
     changes.engine = car[0].engine
   }
-  if (changes.version === "") {
+  if (!changes.version) {
     changes.version = car[0].version
   }
-  if (changes.fuel === "") {
+  if (!changes.fuel) {
     changes.fuel = car[0].fuel
   }
-  if (changes.traction === "") {
+  if (!changes.traction) {
     changes.traction = car[0].traction
   }
-  if (changes.price === "") {
+  if (!changes.price) {
     changes.price = car[0].price
   }
-  if (changes.image.length === 0){
+  if (!changes.image.length === 0){
     changes.image = car[0].image
   }
   if(changes.image.lenght !== 0){
