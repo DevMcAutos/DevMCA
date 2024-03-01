@@ -10,7 +10,7 @@ const LocalStrategy = Strategy;
 
 const user = {
   username: "admin",
-  pass: "tomicardozo07",
+  pass: process.env.PASSWORD,
 };
 
 passport.use(
