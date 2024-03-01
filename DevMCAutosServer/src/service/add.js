@@ -95,6 +95,18 @@ async function updateCarParam(req, res) {
   if (changes.price === "") {
     changes.price = car[0].price
   }
+  if (changes.image.length === 0){
+    changes.image = car[0].image
+  }
+  if(changes.image.lenght !== 0){
+    const imageResult = []
+    for (let i = 0; i < changes.image.length; i++) {
+      if (changes.image[i]) {
+        imageResult.push(changes.image[i])
+      }
+    }
+    changes.image = imageResult
+  }
   changes.name = `${changes.brand} ${changes.model} ${changes.version} ${changes.year}`
   console.log(changes);
   const updateCar = await carController.update(id, changes);
